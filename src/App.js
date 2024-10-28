@@ -3,7 +3,10 @@ import "./App.css";
 import { useState } from "react";
 import Cart from "./Component/Cart";
 import Total from "./Component/Total";
+import TotalContext from "./Global_Store/total-context";
 
+//Context-API: Whenever there is a need to have some data pieces available to various/ multiple components,for the entire application, then you use the Context-API
+//Create a new Context, create a Provider, and a consumer
 function App() {
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
@@ -54,8 +57,10 @@ function App() {
           })}
         </select>
       </div>
-      <Cart cart={cart}/>
-      <Total total={total}/>
+      <TotalContext.Provider value={total}>
+        <Cart cart={cart} />
+        <Total />
+      </TotalContext.Provider>
     </div>
   );
 }
